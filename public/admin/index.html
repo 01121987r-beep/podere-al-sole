@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RuralStay Admin</title>
+  <link rel="stylesheet" href="/admin/styles.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <section id="login-view" class="login-view">
+      <div class="login-card">
+        <p class="eyebrow">Admin multi struttura</p>
+        <h1>RuralStay Control Room</h1>
+        <p class="soft-copy">Gestisci agriturismi, camere, prezzi giornalieri e prenotazioni da un unico pannello.</p>
+        <form id="login-form" class="panel-form">
+          <label>
+            <span>Username</span>
+            <input name="username" type="text" value="admin" required>
+          </label>
+          <label>
+            <span>Password</span>
+            <input name="password" type="password" value="agri123" required>
+          </label>
+          <p id="login-status" class="status-text"></p>
+          <button class="primary-btn" type="submit">Accedi al pannello</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="app-view" class="app-view is-hidden">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Admin struttura</p>
+          <h1>Podere al Sole Admin</h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="refresh-dashboard" class="ghost-btn" type="button">Aggiorna</button>
+          <button id="open-password-modal" class="ghost-btn" type="button">Cambia password</button>
+          <button id="logout-button" class="danger-btn" type="button">Esci</button>
+        </div>
+      </header>
+
+      <section class="stats-grid" id="summary-grid"></section>
+
+      <section class="workspace-grid">
+        <article class="panel-card wide">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow soft">Prenotazioni</p>
+              <h2>Agenda completa</h2>
+            </div>
+            <div class="booking-filters">
+              <label class="inline-filter">
+                <span>Stato</span>
+                <select id="booking-status-filter">
+                  <option value="">Tutti</option>
+                  <option value="confirmed">Confermate</option>
+                  <option value="pending">In attesa</option>
+                  <option value="cancelled">Cancellate</option>
+                </select>
+              </label>
+              <label class="inline-filter">
+                <span>Periodo</span>
+                <select id="booking-period-mode">
+                  <option value="">Tutti i periodi</option>
+                  <option value="month">Mese</option>
+                  <option value="week">Settimana</option>
+                </select>
+              </label>
+              <label class="inline-filter is-hidden" id="booking-period-input-wrap">
+                <span id="booking-period-label">Seleziona dal calendario</span>
+                <button id="booking-period-trigger" class="period-trigger" type="button">
+                  <span id="booking-period-display">Seleziona</span>
+                </button>
+                <div id="booking-period-panel" class="period-panel is-hidden">
+                  <div class="period-panel-head">
+                    <button id="booking-period-prev-year" class="ghost-btn small-btn" type="button">‹</button>
+                    <strong id="booking-period-year">2026</strong>
+                    <button id="booking-period-next-year" class="ghost-btn small-btn" type="button">›</button>
+                  </div>
+                  <div id="booking-period-months" class="period-months-grid"></div>
+                  <div id="booking-period-weeks" class="period-weeks-list is-hidden"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Camera</th>
+                  <th>Cliente</th>
+                  <th>Note del cliente</th>
+                  <th>Date</th>
+                  <th>Totale</th>
+                  <th>Stato</th>
+                </tr>
+              </thead>
+              <tbody id="bookings-table-body"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel-card wide">
+          <div class="panel-head split-mobile">
+            <div>
+              <p class="eyebrow soft">Calendar manager</p>
+              <h2>Prezzi e disponibilità per camera</h2>
+            </div>
+            <div class="calendar-controls">
+              <label>
+                <span>Camera</span>
+                <select id="calendar-room-select"></select>
+              </label>
+              <label>
+                <span>Mese</span>
+                <input id="calendar-month-input" type="hidden">
+                <button id="calendar-month-trigger" class="period-trigger" type="button">
+                  <span id="calendar-month-display">Seleziona mese</span>
+                </button>
+                <div id="calendar-month-panel" class="period-panel is-hidden">
+                  <div class="period-panel-head">
+                    <button id="calendar-month-prev-year" class="ghost-btn small-btn" type="button">‹</button>
+                    <strong id="calendar-month-year">2026</strong>
+                    <button id="calendar-month-next-year" class="ghost-btn small-btn" type="button">›</button>
+                  </div>
+                  <div id="calendar-months-grid" class="period-months-grid"></div>
+                </div>
+              </label>
+              <button id="load-calendar-button" class="ghost-btn" type="button">Carica calendario</button>
+            </div>
+          </div>
+          <div id="calendar-editor" class="calendar-editor">
+            <p class="status-text">Seleziona una camera per modificare il calendario giornaliero.</p>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div id="rooms-admin-list" class="rooms-admin-grid"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow soft">Nuova camera</p>
+              <h2>Aggiungi camera</h2>
+            </div>
+          </div>
+          <form id="room-form" class="panel-form compact">
+            <label><span>Nome camera</span><input name="name" type="text" required></label>
+            <label><span>Descrizione</span><textarea name="description" rows="4" required></textarea></label>
+            <div class="two-col">
+              <label><span>Capacità</span><input name="capacity" type="number" min="1" value="2" required></label>
+              <label><span>Prezzo base</span><input name="base_price" type="number" min="50" step="1" value="150" required></label>
+            </div>
+            <label><span>Foto card camera</span><input name="image_url" type="url" required></label>
+            <label><span>Foto secondarie camera</span><textarea name="gallery_images" rows="4" placeholder="Una URL per riga: bagno, letto, dettagli..."></textarea></label>
+            <div id="room-gallery-preview" class="gallery-preview"></div>
+            <label><span>Servizi camera</span><input name="amenities" type="text" placeholder="Vista vigneti, Colazione inclusa"></label>
+            <p id="room-form-status" class="status-text"></p>
+            <button class="primary-btn" type="submit">Salva camera</button>
+          </form>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="password-dialog" class="modal">
+    <div class="modal-card">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow soft">Sicurezza</p>
+          <h2>Cambia password</h2>
+        </div>
+        <button id="close-password-modal" class="close-btn" type="button">×</button>
+      </div>
+      <form id="password-form" class="panel-form compact">
+        <label><span>Password attuale</span><input name="currentPassword" type="password" required></label>
+        <label><span>Nuova password</span><input name="newPassword" type="password" minlength="6" required></label>
+        <p id="password-status" class="status-text"></p>
+        <button class="primary-btn" type="submit">Aggiorna password</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="room-dialog" class="modal">
+    <div class="modal-card">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow soft">Camera</p>
+          <h2>Modifica camera</h2>
+        </div>
+        <button id="close-room-modal" class="close-btn" type="button">×</button>
+      </div>
+      <form id="room-edit-form" class="panel-form compact">
+        <input name="id" type="hidden">
+        <label><span>Nome camera</span><input name="name" type="text" required></label>
+        <label><span>Descrizione</span><textarea name="description" rows="4" required></textarea></label>
+        <div class="two-col">
+          <label><span>Capacità</span><input name="capacity" type="number" min="1" required></label>
+          <label><span>Prezzo base</span><input name="base_price" type="number" min="50" step="1" required></label>
+        </div>
+        <label><span>Foto card camera</span><input name="image_url" type="url" required></label>
+        <label><span>Foto secondarie camera</span><textarea name="gallery_images" rows="4" placeholder="Una URL per riga: bagno, letto, dettagli..."></textarea></label>
+        <div id="room-edit-gallery-preview" class="gallery-preview"></div>
+        <label><span>Servizi camera</span><input name="amenities" type="text"></label>
+        <label class="day-switch">
+          <input name="active" type="checkbox">
+          <span>Pubblica questa camera nel frontend</span>
+        </label>
+        <p id="room-edit-status" class="status-text"></p>
+        <button class="primary-btn" type="submit">Salva modifiche</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="booking-dialog" class="modal">
+    <div class="modal-card">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow soft">Prenotazione</p>
+          <h2>Modifica stato</h2>
+        </div>
+        <button id="close-booking-modal" class="close-btn" type="button">×</button>
+      </div>
+      <form id="booking-edit-form" class="panel-form compact">
+        <input name="id" type="hidden">
+        <div class="booking-modal-summary">
+          <strong id="booking-modal-customer">Cliente</strong>
+          <span id="booking-modal-meta" class="soft-copy"></span>
+        </div>
+        <label><span>Nuovo stato</span>
+          <select name="status">
+            <option value="confirmed">Confermata</option>
+            <option value="pending">In attesa</option>
+            <option value="cancelled">Cancellata</option>
+          </select>
+        </label>
+        <p id="booking-edit-status" class="status-text"></p>
+        <button class="primary-btn" type="submit">Salva stato</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="/admin/app.js" type="module"></script>
+</body>
+</html>

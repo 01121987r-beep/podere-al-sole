@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: podere-al-sole
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /var/data/agriturismo.sqlite
+    disk:
+      name: podere-al-sole-data
+      mountPath: /var/data
+      sizeGB: 1
