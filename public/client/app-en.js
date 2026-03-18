@@ -78,7 +78,7 @@ const refs = {
   roomGalleryStage: document.querySelector('#room-gallery-stage'),
   roomGalleryThumbs: document.querySelector('#room-gallery-thumbs'),
   languageSwitchButtons: document.querySelectorAll('[data-lang]'),
-  siteHeaderActions: document.querySelector('.site-header-actions'),
+  siteHeader: document.querySelector('.site-header-inner'),
   siteMenuToggle: document.querySelector('#site-menu-toggle'),
   siteNavLinks: document.querySelectorAll('.site-nav a'),
   bookingDialog: document.querySelector('#booking-dialog'),
@@ -839,12 +839,12 @@ function bindEvents() {
   refs.cookieAccept?.addEventListener('click', () => setCookieConsent('accepted'));
   refs.cookieReject?.addEventListener('click', () => setCookieConsent('rejected'));
   refs.siteMenuToggle?.addEventListener('click', () => {
-    const isOpen = refs.siteHeaderActions?.classList.toggle('is-open');
+    const isOpen = refs.siteHeader?.classList.toggle('is-open');
     refs.siteMenuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
   refs.siteNavLinks.forEach((link) => {
     link.addEventListener('click', () => {
-      refs.siteHeaderActions?.classList.remove('is-open');
+      refs.siteHeader?.classList.remove('is-open');
       refs.siteMenuToggle?.setAttribute('aria-expanded', 'false');
     });
   });
