@@ -64,6 +64,15 @@ main { overflow: hidden; }
   gap: 18px;
   flex-wrap: wrap;
 }
+.site-menu-toggle {
+  display: none;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(72, 46, 26, 0.08);
+  background: rgba(255,255,255,0.42);
+  color: var(--muted);
+}
 .site-brand {
   color: var(--ink);
   text-decoration: none;
@@ -626,7 +635,15 @@ main { overflow: hidden; }
   gap: 10px;
 }
 .calendar-day strong { font-size: 1.05rem; }
-.calendar-price { font-size: 0.82rem; color: inherit; opacity: 0.82; }
+.calendar-price {
+  font-size: 0.78rem;
+  color: inherit;
+  opacity: 0.82;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
 
 .story-section {
   padding: 0;
@@ -1340,29 +1357,45 @@ main { overflow: hidden; }
     margin-top: 12px;
     padding: 12px 14px;
     border-radius: 26px;
-    align-items: start;
-    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
   }
   .site-brand {
     font-size: 1.26rem;
   }
   .site-header-actions {
     width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
     gap: 12px;
   }
+  .site-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+  }
   .site-nav {
+    display: none;
     width: 100%;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .site-header-actions.is-open .site-nav {
+    display: flex;
   }
   .site-nav a {
-    flex: 1 1 calc(33.333% - 8px);
+    width: 100%;
     justify-content: center;
     padding-inline: 12px;
     min-width: 0;
   }
   .language-switch {
     justify-content: flex-end;
+    grid-column: 2;
+    grid-row: 1;
   }
   .hero-section { min-height: calc(72vh - 96px); padding-bottom: 20px; }
   .hero-content h1 { font-size: clamp(2.6rem, 14vw, 4.2rem); }
@@ -1402,7 +1435,10 @@ main { overflow: hidden; }
   }
   .calendar-day,
   .calendar-day-empty { min-height: 74px; padding: 8px 6px; border-radius: 14px; }
-  .calendar-price { font-size: 0.72rem; }
+  .calendar-price {
+    font-size: 0.56rem;
+    letter-spacing: -0.04em;
+  }
   .inline-head,
   .room-top { flex-direction: column; }
   .feature-section,
@@ -1416,7 +1452,10 @@ main { overflow: hidden; }
     padding: 44px 0 56px;
   }
   body {
-    padding-bottom: 152px;
+    padding-bottom: 0;
+  }
+  .site-footer {
+    position: static;
   }
   .site-footer-inner {
     width: calc(100vw - 24px);
@@ -1433,7 +1472,7 @@ main { overflow: hidden; }
     width: 56px;
     height: 56px;
     right: max(40px, env(safe-area-inset-right) + 40px);
-    bottom: 188px;
+    bottom: 24px;
   }
   .floating-whatsapp svg {
     width: 28px;

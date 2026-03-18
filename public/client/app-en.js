@@ -78,6 +78,9 @@ const refs = {
   roomGalleryStage: document.querySelector('#room-gallery-stage'),
   roomGalleryThumbs: document.querySelector('#room-gallery-thumbs'),
   languageSwitchButtons: document.querySelectorAll('[data-lang]'),
+  siteHeaderActions: document.querySelector('.site-header-actions'),
+  siteMenuToggle: document.querySelector('#site-menu-toggle'),
+  siteNavLinks: document.querySelectorAll('.site-nav a'),
   bookingDialog: document.querySelector('#booking-dialog'),
   closeBookingDialog: document.querySelector('#close-booking-dialog'),
   bookingRoomResult: document.querySelector('#booking-room-result'),
@@ -144,6 +147,10 @@ function formatMoney(value) {
     currency: 'EUR',
     maximumFractionDigits: 0
   }).format(Number(value || 0));
+}
+
+function formatCalendarPrice(value) {
+  return `€${Number(value || 0)}`;
 }
 
 function toLongDate(value) {
@@ -506,7 +513,7 @@ function renderBookingCalendar() {
         <strong>${new Date(`${day.day}T12:00:00`).getDate()}</strong>
         ${blocked
           ? '<span class="calendar-x" aria-hidden="true">×</span>'
-          : `<span class="calendar-price">${formatMoney(day.price)}</span>`}
+          : `<span class="calendar-price">${formatCalendarPrice(day.price)}</span>`}
       </button>
     `);
   });
@@ -558,7 +565,7 @@ function renderHeroCalendar() {
         <strong>${new Date(`${day.day}T12:00:00`).getDate()}</strong>
         ${blocked
           ? '<span class="calendar-x" aria-hidden="true">×</span>'
-          : `<span class="calendar-price">${formatMoney(day.price)}</span>`}
+          : `<span class="calendar-price">${formatCalendarPrice(day.price)}</span>`}
       </button>
     `);
   });
@@ -831,6 +838,16 @@ function bindEvents() {
   });
   refs.cookieAccept?.addEventListener('click', () => setCookieConsent('accepted'));
   refs.cookieReject?.addEventListener('click', () => setCookieConsent('rejected'));
+  refs.siteMenuToggle?.addEventListener('click', () => {
+    const isOpen = refs.siteHeaderActions?.classList.toggle('is-open');
+    refs.siteMenuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  refs.siteNavLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      refs.siteHeaderActions?.classList.remove('is-open');
+      refs.siteMenuToggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
 }
 
 function setCookieConsent(value) {
