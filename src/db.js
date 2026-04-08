@@ -126,8 +126,11 @@ export function initializeDatabase() {
 function seedAdmin() {
   const count = db.prepare('SELECT COUNT(*) AS count FROM admin_users').get().count;
   if (count > 0) return;
+  const username = `${process.env.ADMIN_DEFAULT_USERNAME || 'admin'}`.trim();
+  const password = `${process.env.ADMIN_DEFAULT_PASSWORD || 'agri123'}`;
+  const displayName = `${process.env.ADMIN_DEFAULT_DISPLAY_NAME || 'Host Manager'}`.trim();
   db.prepare('INSERT INTO admin_users (username, password_hash, display_name) VALUES (?, ?, ?)')
-    .run('admin', hashPassword('agri123'), 'Host Manager');
+    .run(username, hashPassword(password), displayName);
 }
 
 function seedProperties() {

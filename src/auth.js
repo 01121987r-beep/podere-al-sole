@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 
 const HASH_ALGO = 'sha256';
-const SALT = 'agriturismo-platform-salt';
+const SALT = process.env.PASSWORD_SALT || 'agriturismo-platform-salt';
 
 export function hashPassword(password) {
   return crypto.createHash(HASH_ALGO).update(`${SALT}:${password}`).digest('hex');

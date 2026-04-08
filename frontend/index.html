@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podere al Sole</title>
+  <link rel="alternate" hreflang="it" href="./index.html">
+  <link rel="alternate" hreflang="en" href="./en.html">
+  <link rel="stylesheet" href="./styles.css?v=20260317-3">
+</head>
+<body>
+  <main>
+    <section class="hero-shell">
+      <div class="hero-backdrop"></div>
+      <section class="hero-section" id="top">
+        <div class="hero-content content-width">
+          <header class="site-header">
+            <div class="site-header-inner">
+              <a class="site-brand" href="#top">Podere al Sole</a>
+              <div class="site-header-actions">
+                <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Apri menu">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
+                <nav class="site-nav" id="site-nav" aria-label="Navigazione principale">
+                  <a href="#rooms-section">Camere</a>
+                  <a href="#restaurant-section">Ristorante</a>
+                  <a href="#contact-section">Contatti</a>
+                </nav>
+                <div class="language-switch" role="group" aria-label="Selettore lingua">
+                  <a class="language-switch-btn is-active" href="./index.html" data-lang="it">ITA</a>
+                  <span>/</span>
+                  <a class="language-switch-btn" href="./en.html" data-lang="en">ENG</a>
+                </div>
+              </div>
+            </div>
+          </header>
+          <p class="eyebrow">Agriturismo in Toscana</p>
+          <h1 id="hero-title">Podere al Sole</h1>
+          <p id="hero-copy" class="hero-copy">Un rifugio tra vigne, tramonti e colazioni fatte in casa, pensato per chi cerca quiete autentica e ospitalità calda.</p>
+          <form id="search-form" class="booking-bar booking-bar-compact">
+            <button id="hero-period-trigger" class="booking-bar-period" type="button">
+              <span>Periodo selezionato</span>
+              <strong id="hero-selected-period">Scegli dal calendario qui sotto</strong>
+            </button>
+            <label>
+              <span>Ospiti</span>
+              <input name="guests" type="number" min="1" value="2" required>
+            </label>
+            <button class="primary-btn" type="submit">Verifica disponibilità</button>
+          </form>
+          <div id="hero-calendar-shell" class="hero-calendar-shell is-hidden">
+            <div class="booking-calendar-toolbar hero-calendar-toolbar">
+              <button id="hero-prev-month" class="chip-btn month-nav-btn" type="button" aria-label="Mese precedente">‹</button>
+              <strong id="hero-month-label" class="booking-month-label"></strong>
+              <button id="hero-next-month" class="chip-btn month-nav-btn" type="button" aria-label="Mese successivo">›</button>
+            </div>
+            <div id="hero-calendar-status" class="hero-calendar-status"></div>
+            <div id="hero-calendar-grid" class="calendar-grid hero-calendar-grid"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="band band-warm feature-section">
+      <div class="feature-stage-shell">
+        <div id="story-sequence" class="feature-stage"></div>
+      </div>
+    </section>
+
+    <section class="band band-olive" id="rooms-section">
+      <div class="rooms-section content-width">
+        <div class="section-heading wide">
+          <p class="eyebrow warm">Camere</p>
+          <h2>Scegli la sistemazione più adatta al soggiorno</h2>
+          <p id="results-status" class="status-copy"></p>
+        </div>
+        <div id="rooms-grid" class="rooms-grid"></div>
+      </div>
+    </section>
+
+    <section class="story-section band band-dark" id="restaurant-section">
+      <div class="story-layout">
+        <div class="story-intro">
+          <p class="eyebrow olive">Ristorante</p>
+          <h2>La cucina dell’agriturismo racconta il territorio con piatti semplici, curati e stagionali.</h2>
+          <div class="story-offers">
+            <span class="story-offer">Colazione</span>
+            <span class="story-offer">Cena</span>
+            <span class="story-offer">Degustazione</span>
+            <span class="story-offer">Prodotti locali</span>
+          </div>
+        </div>
+        <div id="story-visual" class="story-visual">
+          <div class="story-visual-copy">
+            <p id="story-visual-kicker" class="story-visual-kicker">Sapori autentici</p>
+            <p id="story-visual-text" class="story-visual-text"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews-section band band-warm">
+      <div class="content-width reviews-layout">
+        <div class="reviews-intro">
+          <p class="eyebrow warm">Recensioni</p>
+          <h2>Chi soggiorna qui ricorda soprattutto la calma, l’accoglienza e il ritmo semplice della campagna.</h2>
+          <div class="reviews-score">
+            <strong>4.8</strong>
+            <span>su 5 · 148 recensioni verificate</span>
+          </div>
+        </div>
+        <div class="reviews-carousel">
+          <div class="reviews-track">
+            <div class="reviews-group">
+              <article class="review-card">
+                <p class="review-quote">“Posto curato, camere molto pulite e una colazione fatta in casa che da sola vale il viaggio. Si respira davvero la Toscana.”</p>
+                <div class="review-meta">
+                  <strong>Elena, Milano</strong>
+                  <span>Soggiorno di coppia · marzo 2026</span>
+                </div>
+              </article>
+              <article class="review-card">
+                <p class="review-quote">“Abbiamo prenotato direttamente dal sito in pochi passaggi. Atmosfera rilassata, cena ottima e staff sempre presente senza essere invadente.”</p>
+                <div class="review-meta">
+                  <strong>Luca e Martina, Bologna</strong>
+                  <span>Weekend in campagna · febbraio 2026</span>
+                </div>
+              </article>
+              <article class="review-card">
+                <p class="review-quote">“La Suite Tramonto è stata perfetta per noi. Vista bellissima, dettagli curati e un’accoglienza calda, autentica, molto diversa dai posti impersonali.”</p>
+                <div class="review-meta">
+                  <strong>Sofia, Torino</strong>
+                  <span>Soggiorno relax · gennaio 2026</span>
+                </div>
+              </article>
+            </div>
+            <div class="reviews-group" aria-hidden="true">
+              <article class="review-card">
+                <p class="review-quote">“Posto curato, camere molto pulite e una colazione fatta in casa che da sola vale il viaggio. Si respira davvero la Toscana.”</p>
+                <div class="review-meta">
+                  <strong>Elena, Milano</strong>
+                  <span>Soggiorno di coppia · marzo 2026</span>
+                </div>
+              </article>
+              <article class="review-card">
+                <p class="review-quote">“Abbiamo prenotato direttamente dal sito in pochi passaggi. Atmosfera rilassata, cena ottima e staff sempre presente senza essere invadente.”</p>
+                <div class="review-meta">
+                  <strong>Luca e Martina, Bologna</strong>
+                  <span>Weekend in campagna · febbraio 2026</span>
+                </div>
+              </article>
+              <article class="review-card">
+                <p class="review-quote">“La Suite Tramonto è stata perfetta per noi. Vista bellissima, dettagli curati e un’accoglienza calda, autentica, molto diversa dai posti impersonali.”</p>
+                <div class="review-meta">
+                  <strong>Sofia, Torino</strong>
+                  <span>Soggiorno relax · gennaio 2026</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section band band-light" id="contact-section">
+      <div class="contact-layout">
+        <div class="contact-form-block">
+          <p class="eyebrow warm">Informazioni</p>
+          <h2>Richiedi dettagli sul soggiorno, sulla cucina o sulla disponibilità.</h2>
+          <p class="lead-copy">Se vuoi maggiori informazioni prima di prenotare, possiamo risponderti con indicazioni su camere, periodi, cene e servizi inclusi.</p>
+          <form id="contact-form" class="contact-form">
+            <label><span>Nome</span><input name="name" type="text" required></label>
+            <label><span>Email</span><input name="email" type="email" required></label>
+            <label><span>Telefono</span><input name="phone" type="tel"></label>
+            <label><span>Messaggio</span><textarea name="message" rows="5" placeholder="Vorrei avere informazioni sulla disponibilità per aprile e sulla cena in struttura..." required></textarea></label>
+            <div class="consent-check">
+              <input id="contact-privacy-consent" name="privacy_consent" type="checkbox" required>
+              <label for="contact-privacy-consent">Acconsento al trattamento dei dati personali per la gestione della richiesta di contatto.</label>
+            </div>
+            <p id="contact-form-status" class="status-copy"></p>
+            <button class="primary-btn" type="submit">Invia richiesta</button>
+          </form>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-map-shell">
+            <iframe
+              title="Mappa Podere al Sole"
+              src="https://www.google.com/maps?q=San%20Gimignano%2C%20Toscana&z=13&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="contact-area-copy">
+            <p>Podere al Sole si trova tra le colline di San Gimignano, in una posizione tranquilla ma comoda da raggiungere in auto da Siena, Firenze e Volterra.</p>
+            <p>Gli ultimi minuti di strada attraversano vigne e campagna toscana: un arrivo semplice, panoramico e già parte dell’esperienza di soggiorno.</p>
+          </div>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <strong>Via delle Colline 18, San Gimignano (SI)</strong>
+            </div>
+            <div class="contact-detail">
+              <a href="tel:+390577123456">+39 0577 123456</a>
+            </div>
+            <div class="contact-detail">
+              <a href="mailto:info@poderealsole.it">info@poderealsole.it</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a
+    class="floating-whatsapp"
+    href="https://wa.me/390577123456?text=Ciao%2C%20vorrei%20ricevere%20informazioni%20su%20Podere%20al%20Sole."
+    target="_blank"
+    rel="noreferrer"
+    aria-label="Contattaci su WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M19.05 4.94A9.9 9.9 0 0 0 12.02 2a9.97 9.97 0 0 0-8.63 14.95L2 22l5.2-1.36A9.96 9.96 0 0 0 12 22h.01A9.99 9.99 0 0 0 22 12.01a9.9 9.9 0 0 0-2.95-7.07Zm-7.03 15.38h-.01a8.3 8.3 0 0 1-4.23-1.16l-.3-.18-3.08.81.82-3-.2-.31a8.31 8.31 0 1 1 7 3.84Zm4.56-6.23c-.25-.12-1.47-.72-1.7-.8-.23-.08-.4-.12-.57.12-.17.25-.65.8-.8.97-.15.17-.3.19-.55.06-.25-.12-1.06-.39-2.02-1.25-.74-.66-1.24-1.48-1.39-1.73-.15-.25-.02-.38.11-.5.11-.11.25-.3.37-.45.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.57-1.37-.78-1.88-.21-.5-.42-.43-.57-.44h-.48c-.17 0-.43.06-.65.31-.22.25-.86.84-.86 2.05s.88 2.39 1 2.55c.12.17 1.72 2.62 4.16 3.67.58.25 1.03.39 1.38.5.58.19 1.1.16 1.52.1.46-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z"/>
+    </svg>
+  </a>
+
+  <div id="cookie-banner" class="cookie-banner is-hidden" role="dialog" aria-live="polite" aria-label="Consenso cookie">
+    <div class="cookie-banner-copy">
+      <strong>Cookie</strong>
+      <p>Utilizziamo cookie tecnici e, previo consenso, cookie di analisi per migliorare l’esperienza sul sito. Puoi leggere i dettagli nella <a href="./cookie.html">Cookie Policy</a>.</p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button id="cookie-reject" class="chip-btn" type="button">Rifiuta</button>
+      <button id="cookie-accept" class="primary-btn" type="button">Accetta</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="site-footer-brand">
+        <strong>Podere al Sole</strong>
+        <span>Agriturismo tra colline, camere curate e cucina di territorio.</span>
+      </div>
+      <div class="site-footer-links">
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./cookie.html">Cookie Policy</a>
+      </div>
+      <div class="site-footer-socials" aria-label="Social">
+        <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2A3 3 0 0 0 4 7v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5Zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5Zm5.25-3.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z"/>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.87.24-1.46 1.5-1.46H16.7V5a23.4 23.4 0 0 0-2.48-.13c-2.45 0-4.12 1.5-4.12 4.24V11H7.3v3h2.8v8h3.4Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="booking-dialog" class="modal">
+    <div class="modal-card booking-modal">
+      <div class="section-heading inline-head compact-head">
+        <div>
+          <p class="eyebrow warm">Prenotazione</p>
+          <h2>Prenota il soggiorno</h2>
+        </div>
+        <button id="close-booking-dialog" class="close-btn" type="button">×</button>
+      </div>
+      <div id="booking-room-result" class="booking-room-result"></div>
+      <button id="booking-activate" class="primary-btn full-width" type="button">Prenota questa camera</button>
+      <div id="booking-flow" class="booking-flow is-hidden">
+      <div id="booking-summary" class="booking-summary"></div>
+      <div class="booking-selection">
+        <div class="booking-selection-head">
+          <strong>Seleziona il periodo</strong>
+          <p id="booking-calendar-status" class="status-copy"></p>
+        </div>
+        <div class="booking-calendar-toolbar">
+          <button id="booking-prev-month" class="chip-btn month-nav-btn" type="button" aria-label="Mese precedente">‹</button>
+          <strong id="booking-month-label" class="booking-month-label"></strong>
+          <button id="booking-next-month" class="chip-btn month-nav-btn" type="button" aria-label="Mese successivo">›</button>
+        </div>
+        <div id="booking-calendar-grid" class="calendar-grid booking-calendar-grid"></div>
+      </div>
+      <form id="booking-form" class="booking-form">
+        <label><span>Nome</span><input name="customer_name" type="text" required></label>
+        <label><span>Email</span><input name="customer_email" type="email" required></label>
+        <label><span>Telefono</span><input name="customer_phone" type="tel" required></label>
+        <label><span>Note</span><textarea name="customer_notes" rows="3" placeholder="Arrivo previsto, richieste speciali..."></textarea></label>
+        <div class="consent-check">
+          <input id="privacy-consent" name="privacy_consent" type="checkbox" required>
+          <label for="privacy-consent">Acconsento al trattamento dei dati personali per la gestione della prenotazione.</label>
+        </div>
+        <div id="booking-total-box" class="booking-total-box">
+          <span class="booking-total-label">Totale soggiorno</span>
+          <strong id="booking-total-value">Seleziona il periodo</strong>
+        </div>
+        <p id="booking-form-status" class="status-copy"></p>
+        <button class="primary-btn full-width" type="submit">Conferma prenotazione</button>
+      </form>
+      </div>
+    </div>
+  </dialog>
+
+  <template id="room-card-template">
+    <article class="room-card">
+      <div class="room-visual"></div>
+      <div class="room-body">
+        <div class="room-top">
+          <div>
+            <h3></h3>
+            <p class="room-copy"></p>
+          </div>
+          <div class="room-price"></div>
+        </div>
+        <div class="room-meta"></div>
+        <div class="room-amenities"></div>
+        <div class="room-actions">
+          <button class="chip-btn room-open-gallery" type="button">Scopri la camera</button>
+          <button class="primary-btn room-open-booking" type="button">Prenota</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <dialog id="room-gallery-dialog" class="modal">
+    <div class="modal-card room-gallery-modal">
+      <div class="section-heading inline-head compact-head">
+        <div>
+          <p class="eyebrow warm">Camera</p>
+          <h2 id="room-gallery-title">Scopri la camera</h2>
+        </div>
+        <button id="close-room-gallery-dialog" class="close-btn" type="button">×</button>
+      </div>
+      <div id="room-gallery-stage" class="room-gallery-stage"></div>
+      <div id="room-gallery-thumbs" class="room-gallery-thumbs"></div>
+    </div>
+  </dialog>
+
+  <script src="./config.js"></script>
+  <script src="./app.js" type="module"></script>
+</body>
+</html>

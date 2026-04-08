@@ -29,21 +29,41 @@ import { generateToken, hashPassword, verifyPassword } from './auth.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicDir = path.join(__dirname, '..', 'public');
+const adminDir = path.join(publicDir, 'admin');
+const clientDir = path.join(publicDir, 'client');
 const app = express();
 const PORT = process.env.PORT || 3300;
 const HOST = process.env.HOST || '0.0.0.0';
+const SERVE_CLIENT = process.env.SERVE_CLIENT === 'true';
+const CORS_ALLOWED_ORIGINS = `${process.env.CORS_ALLOWED_ORIGINS || '*'}`.trim();
+const ALLOW_ALL_ORIGINS = CORS_ALLOWED_ORIGINS === '*';
+const ALLOWED_ORIGIN_SET = new Set(
+  CORS_ALLOWED_ORIGINS.split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+);
 
 initializeDatabase();
 
 app.use(express.json({ limit: '1mb' }));
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  const requestOrigin = `${req.headers.origin || ''}`.trim();
+  if (ALLOW_ALL_ORIGINS) {
+    res.header('Access-Control-Allow-Origin', '*');
+  } else if (!requestOrigin || ALLOWED_ORIGIN_SET.has(requestOrigin)) {
+    if (requestOrigin) {
+      res.header('Access-Control-Allow-Origin', requestOrigin);
+      res.header('Vary', 'Origin');
+    }
+  } else if (req.method === 'OPTIONS') {
+    return res.sendStatus(403);
+  }
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
-app.use(express.static(publicDir));
+app.use('/admin', express.static(adminDir));
 
 function respondError(res, status, message) {
   return res.status(status).json({ error: message });
@@ -461,14 +481,21 @@ app.post('/api/admin/bookings/manual', requireAdmin, (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
-  res.sendFile(path.join(publicDir, 'admin', 'index.html'));
+  res.sendFile(path.join(adminDir, 'index.html'));
 });
 
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api/')) return next();
-  if (req.path === '/admin') return next();
-  return res.sendFile(path.join(publicDir, 'client', 'index.html'));
+app.get('/admin/*', (req, res) => {
+  res.sendFile(path.join(adminDir, 'index.html'));
 });
+
+if (SERVE_CLIENT) {
+  app.use(express.static(publicDir));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api/')) return next();
+    if (req.path === '/admin' || req.path.startsWith('/admin/')) return next();
+    return res.sendFile(path.join(clientDir, 'index.html'));
+  });
+}
 
 app.listen(PORT, HOST, () => {
   console.log(`Agriturismo platform running on http://${HOST}:${PORT}`);
